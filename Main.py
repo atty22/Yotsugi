@@ -29,9 +29,7 @@ title = ""
 while len(title) == 0:
     title = input("Title: ")
 
-inpath = input("Path: ")
-if len(inpath) != 0:
-    chdir(inpath)
+chdir(input("Path: "))
 
 # define variable
 nlist = []
