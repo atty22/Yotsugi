@@ -1,6 +1,6 @@
 #!/bin/python
 from glob import glob
-from os import chdir, path, rename, remove
+from os import chdir, path, rename, remove, getcwd
 from subprocess import run
 from requests import post
 from telegraph import Telegraph
@@ -32,9 +32,12 @@ o88o     o8888o   "888"   "888"     .8'     8888888888
 title = ""
 while len(title) == 0:
     title = input("Title: ")
-
-chdir(input('Folder: ').replace("\\", "\\").replace('"', '').replace("'", "\'"))
-
+if system() == 'Windows':
+    chdir(input('Folder: ').replace("\\", "\\").replace('"', '').replace("'", "\'"))
+elif system() == 'Linux':
+    chdir(input('Folder: ').replace("'", "")[:-1])
+else:
+    print("System not supported")
 # define variable
 nlist = []
 listo = []
@@ -72,6 +75,7 @@ print("common prefix: ", prefix)
 number0 = len(str(path.splitext(listfile[0])[0][len(prefix):]))
 for item in listfile:
     nlist.append(str(path.splitext(item)[0][len(prefix):]))  # convert str file name in int to sort
+
 nlist.sort(key=int)
 for itemd in nlist:
     while len(itemd) != number0:
